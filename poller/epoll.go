@@ -4,7 +4,7 @@
 package poller
 
 import (
-	"hxnet/net/define"
+	"github.com/y1015860449/hxnet/define"
 	"log"
 	"runtime"
 	"sync/atomic"
