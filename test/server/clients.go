@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/y1015860449/gotoolkit/coPool"
-	"hxnet/net"
+	"github.com/y1015860449/hxnet"
 	"math/rand"
 	"sync"
 	"time"
@@ -10,7 +10,7 @@ import (
 
 type ClientManager struct {
 	cliLock sync.Mutex
-	clients map[string]*net.Connection
+	clients map[string]*hxnet.Connection
 	addrs   []string
 	rtPool  *coPool.SharePool
 }
@@ -18,21 +18,21 @@ type ClientManager struct {
 func NewClientManager() *ClientManager {
 	rand.Seed(time.Now().UnixNano())
 	manager := &ClientManager{
-		clients: make(map[string]*net.Connection),
+		clients: make(map[string]*hxnet.Connection),
 	}
 	manager.rtPool = coPool.NewSharePool(5, 2, 1024, 30*time.Second)
 
 	return manager
 }
 
-func (p *ClientManager) AddConnection(c *net.Connection) {
+func (p *ClientManager) AddConnection(c *hxnet.Connection) {
 	p.cliLock.Lock()
 	p.clients[c.PeerAddr()] = c
 	p.addrs = append(p.addrs, c.PeerAddr())
 	p.cliLock.Unlock()
 }
 
-func (p *ClientManager) DeleteConnection(c *net.Connection) {
+func (p *ClientManager) DeleteConnection(c *hxnet.Connection) {
 	p.cliLock.Lock()
 	delete(p.clients, c.PeerAddr())
 	for i, v := range p.addrs {
