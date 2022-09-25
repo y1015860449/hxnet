@@ -1,4 +1,4 @@
-package net
+package hxnet
 
 import "github.com/y1015860449/gotoolkit/ringBuffer"
 

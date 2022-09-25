@@ -1,4 +1,4 @@
-package net
+package hxnet
 
 type LoadBalanceStrategy func([]*EventLoop) *EventLoop
 
