@@ -7,8 +7,7 @@ import (
 
 func main() {
 	manager := NewClientManager()
-	defer manager.Release()
-	svc, err := hxnet.NewServer(&netHandler{manager: manager}, net.Ip("0.0.0.0"), net.Port(6684), net.NumLoops(10), net.CustomProtocol(&MyProtocol{}))
+	svc, err := hxnet.NewServer(&netHandler{manager: manager}, hxnet.Ip("0.0.0.0"), hxnet.Port(6684), hxnet.NumLoops(10), hxnet.CustomProtocol(&MyProtocol{}))
 	if err != nil {
 		return
 	}
