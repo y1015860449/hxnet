@@ -1,6 +1,7 @@
 package hxnet
 
 import (
+	"log"
 	"net"
 	"sync/atomic"
 	"syscall"
@@ -39,6 +40,7 @@ func newListener(ip string, port int, hc handleConnected) (*listener, error) {
 		// todo 添加日志
 		return nil, err
 	}
+	log.Println("tcp success!")
 	return &listener{sfd: fd, hc: hc}, nil
 }
 

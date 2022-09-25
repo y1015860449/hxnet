@@ -9,10 +9,11 @@ func main() {
 	manager := NewClientManager()
 	svc, err := hxnet.NewServer(&netHandler{manager: manager}, hxnet.Ip("0.0.0.0"), hxnet.Port(6684), hxnet.NumLoops(10), hxnet.CustomProtocol(&MyProtocol{}))
 	if err != nil {
+		log.Println(err)
 		return
 	}
 	defer svc.Stop()
 	if err = svc.Start(); err != nil {
-		log.Print(err)
+		log.Println(err)
 	}
 }
